@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "authclient",
+  "version": "${version}",
+  "name": "AuthClient",
+  "description": "Authentication component of Zenith (server-side).",
+  "authors": [
+    "Allink"
+  ],
+  "license": "CC0-1.0",
+  "environment": "client",
+  "entrypoints": {
+    "init": [
+      "me.allinkdev.zenith.authclient.AuthClient"
+    ]
+  },
+  "mixins": [
+    "auth-client.mixins.json"
+  ],
+  "depends": {
+    "minecraft": "1.0.0-beta.7.3"
+  }
+}

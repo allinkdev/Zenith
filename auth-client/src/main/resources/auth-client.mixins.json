@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "me.allinkdev.zenith.authclient.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "client": [
+    "ClientPlayNetworkHandlerMixin",
+    "LoginThreadMixin",
+    "SessionMixin",
+    "TitleScreenMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

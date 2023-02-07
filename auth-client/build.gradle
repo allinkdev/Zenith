@@ -1,0 +1,37 @@
+plugins {
+    id 'fabric-loom' version '0d0261a'
+    id 'maven-publish'
+}
+
+java.sourceCompatibility = JavaVersion.VERSION_1_8
+
+repositories {
+    maven {
+        url = 'https://jitpack.io/'
+    }
+    maven {
+        url = 'https://storage.googleapis.com/devan-maven/'
+    }
+}
+
+minecraft {
+    addLibraryFilter { library ->
+        return !(library.startsWith('net.minecraft:launchwrapper:') ||
+                library.startsWith('net.sf.jopt-simple:jopt-simple:') ||
+                library.startsWith('org.ow2.asm:asm-all:'))
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "io.github.minecraft-cursed-legacy:plasma:b1.7.3-build.${project.plasma_build}"
+    modImplementation("io.github.minecraft-cursed-legacy:cursed-fabric-loader:${project.loader_version}") {
+        transitive false
+    }
+}
+
+tasks {
+    assemble {
+        dependsOn(checkstyleMain)
+    }
+}
