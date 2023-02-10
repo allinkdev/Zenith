@@ -86,6 +86,8 @@ public class Whitelist extends JavaPlugin implements Listener, CommandExecutor {
 
     @Override
     public void onEnable() {
+        loadWhitelist();
+
         if (!configFile.exists()) {
             try {
                 saveDefaultConfig();
