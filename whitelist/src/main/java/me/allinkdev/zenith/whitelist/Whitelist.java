@@ -165,26 +165,24 @@ public class Whitelist extends JavaPlugin implements Listener, CommandExecutor {
         }
 
         switch (args[0].toLowerCase()) {
-            case "enable":
+            case "enable" -> {
                 configuration.setProperty("enabled", true);
                 configuration.save();
                 loadWhitelist();
                 sender.sendMessage("Whitelist enabled.");
-                break;
-            case "disable":
+            }
+            case "disable" -> {
                 configuration.setProperty("disabled", false);
                 configuration.save();
                 sender.sendMessage("Whitelist disabled.");
-                break;
-            case "add":
+            }
+            case "add" -> {
                 if (args.length < 2) {
                     sender.sendMessage(COMMAND_SYNTAX);
                     return true;
                 }
-
                 final String who = args[1];
                 WHITELISTED_PLAYERS.add(who);
-
                 try {
                     save();
                 } catch (IOException e) {
@@ -192,18 +190,15 @@ public class Whitelist extends JavaPlugin implements Listener, CommandExecutor {
                     sender.sendMessage(ChatColor.RED + "Failed to save whitelist. Check logs for more details.");
                     return true;
                 }
-
                 sender.sendMessage("Added " + who + " to the whitelist.");
-                break;
-            case "remove":
+            }
+            case "remove" -> {
                 if (args.length < 2) {
                     sender.sendMessage(COMMAND_SYNTAX);
                     return true;
                 }
-
                 final String whoRemove = args[1];
                 final boolean contains = WHITELISTED_PLAYERS.remove(whoRemove);
-
                 try {
                     save();
                 } catch (IOException e) {
@@ -211,17 +206,16 @@ public class Whitelist extends JavaPlugin implements Listener, CommandExecutor {
                     sender.sendMessage(ChatColor.RED + "Failed to save whitelist. Check logs for more details.");
                     return true;
                 }
-
                 if (contains) {
                     sender.sendMessage("Removed " + whoRemove + " from the whitelist.");
                     break;
                 }
-
                 sender.sendMessage(whoRemove + " was not in the whitelist!");
-                break;
-            default:
+            }
+            default -> {
                 sender.sendMessage(COMMAND_SYNTAX);
                 return false;
+            }
         }
 
         return true;
