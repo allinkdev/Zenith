@@ -154,7 +154,7 @@ public abstract class ClientNetworkHandlerMixin {
             return;
         }
 
-        AuthClient.logger.warning(response.toString());
+        AuthClient.logger.warn(response.toString());
 
         connection.disconnect(EXCEPTIONAL_DISCONNECT, responseCode);
     }

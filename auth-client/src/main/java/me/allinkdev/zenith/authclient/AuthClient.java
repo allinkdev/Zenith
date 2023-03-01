@@ -5,14 +5,15 @@ import lombok.Getter;
 import me.allinkdev.zenith.authclient.request.Join;
 import me.allinkdev.zenith.authclient.thread.MySessionCheckThread;
 import net.fabricmc.api.ModInitializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.HttpURLConnection;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.logging.Logger;
 
 public class AuthClient implements ModInitializer {
-    public static final Logger logger = Logger.getLogger("AuthClient");
+    public static final Logger logger = LoggerFactory.getLogger("AuthClient");
     @Getter
     private static final Gson gson = new Gson();
     private static final ExecutorService executor = Executors.newSingleThreadExecutor();
