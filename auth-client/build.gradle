@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version '0d0261a'
+    id 'babric-loom' version '1.1-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -7,27 +7,25 @@ java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     maven {
-        url = 'https://jitpack.io/'
-    }
-    maven {
-        url = 'https://storage.googleapis.com/devan-maven/'
+        url = 'https://maven.glass-launcher.net/babric/'
     }
 }
 
-minecraft {
-    addLibraryFilter { library ->
-        return !(library.startsWith('net.minecraft:launchwrapper:') ||
-                library.startsWith('net.sf.jopt-simple:jopt-simple:') ||
-                library.startsWith('org.ow2.asm:asm-all:'))
-    }
+loom {
+    gluedMinecraftJar()
+    customMinecraftManifest.set("https://babric.github.io/manifest-polyfill/${minecraft_version}.json")
+    intermediaryUrl.set("https://maven.glass-launcher.net/babric/babric/intermediary/%1\$s/intermediary-%1\$s-v2.jar")
 }
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "io.github.minecraft-cursed-legacy:plasma:b1.7.3-build.${project.plasma_build}"
-    modImplementation("io.github.minecraft-cursed-legacy:cursed-fabric-loader:${project.loader_version}") {
-        transitive false
-    }
+    mappings "babric:barn:${project.yarn_mappings}:v2"
+    modImplementation "babric:fabric-loader:${project.loader_version}"
+
+    implementation "org.slf4j:slf4j-api:1.8.0-beta4"
+    implementation "org.apache.logging.log4j:log4j-slf4j18-impl:2.16.0"
+
+    compileOnly "com.google.code.gson:gson:2.10.1"
 }
 
 tasks {

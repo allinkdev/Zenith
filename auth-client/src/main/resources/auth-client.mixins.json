@@ -3,8 +3,9 @@
   "package": "me.allinkdev.zenith.authclient.mixin",
   "compatibilityLevel": "JAVA_8",
   "client": [
-    "ClientPlayNetworkHandlerMixin",
-    "LoginThreadMixin",
+    "ClientNetworkHandlerMixin",
+    "ClientNetworkHandlerMixin$ConnectionAccessor",
+    "SessionCheckThreadMixin",
     "SessionMixin",
     "TitleScreenMixin"
   ],
