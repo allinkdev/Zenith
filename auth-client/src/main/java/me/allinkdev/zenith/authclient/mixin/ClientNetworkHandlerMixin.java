@@ -1,6 +1,7 @@
 package me.allinkdev.zenith.authclient.mixin;
 
 import com.google.gson.Gson;
+import me.allinkdev.zenith.authclient.ActualSession;
 import me.allinkdev.zenith.authclient.AuthClient;
 import me.allinkdev.zenith.authclient.request.Join;
 import net.minecraft.client.network.ClientNetworkHandler;
@@ -32,6 +33,7 @@ public abstract class ClientNetworkHandlerMixin {
     public void handleHandshake(final HandshakePacket packet, final CallbackInfo ci) {
         ci.cancel();
 
+        final ActualSession session = AuthClient.getSession();
         final ConnectionAccessor connectionAccessor = (ConnectionAccessor) this;
         final Connection connection = connectionAccessor.getConnection();
         final String username = AuthClient.getUsername();
@@ -70,7 +72,8 @@ public abstract class ClientNetworkHandlerMixin {
             return;
         }
 
-        AuthClient.setAuthorization(urlConnection);
+        AuthClient.setAuthorization(urlConnection, session);
+
         urlConnection.setRequestProperty("Content-Type", "application/json");
         urlConnection.setDoOutput(true);
         urlConnection.setDoInput(true);
